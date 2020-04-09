@@ -1,6 +1,6 @@
 # TM Manager mobile app
 
-# Architecture:
+## Architecture:
 Application architecture based on .Net Core DI, MVVM implemented with IViewPresenter interface in core project, as DroidViewPresenter on Android (every view model has appropriate named fragment), on iOS as IosViewPresenter (every view model has appropriate named view controller)
 
 **AssigmentManagerMobile.Core.Data**
@@ -45,7 +45,7 @@ For this purpose tests use backdoor methods. Backdoor methods implemented for An
 only for UITESTS configuration. In order to run UI tests properly app should be installed on device with configuration UITESTS.
 
 
-# Hacks:
+## Hacks:
 **AssigmentManagerMobile.Core** has resources that are shared across Android and iOS.
 These resources are: Colors, Dimensions, Strings, ViewsIds. To generate these C# values into platform-specific values
 project use T4 templates. This template create XML-resource files on Android C# classes on iOS from shared code.
