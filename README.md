@@ -51,12 +51,18 @@ only for UITESTS configuration. In order to run UI tests properly app should be 
 
 ## Configurations
 App has next configurations: DEBUGMOCK, DEBUGREAL, STAGING, STORE, TEST, UITESTS.
-DEBUGMOCK configured to use fake AssigmentManager.Fake project instead of real implementations.
-DEBUGREAL configured to use real API of test environment.
-STAGING configured to use real API of staging environment.
-STORE configured to use production API and contains production-ready app config.
-TEST configured to run AssignmentManagerMobile.Tests. In this configuration app use mocks instead of real or fake services.
-UITEST. In this configuration app use fake services from AssigmentManager.Fake. Platform projects also implement backdoor methods for this configuration for UI testing.
+
+**DEBUGMOCK** configured to use fake AssigmentManager.Fake project instead of real implementations.
+
+**DEBUGREAL** configured to use real API of test environment.
+
+**STAGING** configured to use real API of staging environment.
+
+**STORE** configured to use production API and contains production-ready app config.
+
+**TEST** configured to run AssignmentManagerMobile.Tests. In this configuration app use mocks instead of real or fake services.
+
+**UITEST** In this configuration app use fake services from AssigmentManager.Fake. Platform projects also implement backdoor methods for this configuration for UI testing.
 
 ## Hacks:
 **AssigmentManagerMobile.Core** has resources that are shared across Android and iOS.
