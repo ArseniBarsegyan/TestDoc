@@ -70,3 +70,6 @@ These resources are: Colors, Dimensions, Strings, ViewsIds. To generate these C#
 project use T4 templates. This template create XML-resource files on Android C# classes on iOS from shared code.
 
 **AssigmentManager.Fake** included in **AssigmentManagerMobile.Core** only for DEBUGMOCK or UITESTS configurations.
+
+## Running tests
+To run UI tests first install app on device with configuration **UITESTS**. On iOS, replace device id with your simulator id at AppInitializer.cs
