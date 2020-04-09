@@ -5,6 +5,9 @@ Application architecture based on .Net Core DI, MVVM implemented with IViewPrese
 
 ![Architecture image](/TMManagerDiagram.png)
 
+## Solution structure:
+![Solution structure image](/Solution_screenshot.png)
+
 **AssigmentManagerMobile.Core.Data**
 Contains models for entire app
 
