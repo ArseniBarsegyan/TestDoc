@@ -21,12 +21,12 @@ All shared dependencies configured here
 
 **AssigmentManagerMobile.Droid**
 Xamarin android native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core.
-All platform-specific dependencies registered here
+All platform-specific dependencies registered here.
 Contains platform-specific logic (navigation implementation and UI), use shared code.
 
 **AssigmentManagerMobile.iOS**
 Xamarin iOS native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core.
-All platform-specific dependencies registered here
+All platform-specific dependencies registered here.
 Contains platform-specific logic (navigation implementation and UI), use shared code.
 
 **AssigmentManager.Fake**
