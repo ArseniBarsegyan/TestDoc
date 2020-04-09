@@ -49,7 +49,7 @@ Every feature runs independently. Some tests covers different UI conditions that
 For this purpose tests use backdoor methods. Backdoor methods implemented for Android and iOS and included in source code
 only for UITESTS configuration. In order to run UI tests properly app should be installed on device with configuration UITESTS.
 
-## Configurations
+## Configurations:
 App has next configurations: DEBUGMOCK, DEBUGREAL, STAGING, STORE, TEST, UITESTS.
 
 **DEBUGMOCK** configured to use fake AssigmentManager.Fake project instead of real implementations.
@@ -71,5 +71,5 @@ project use T4 templates. This template create XML-resource files on Android C# 
 
 **AssigmentManager.Fake** included in **AssigmentManagerMobile.Core** only for DEBUGMOCK or UITESTS configurations.
 
-## Running tests
+## Running tests:
 To run UI tests first install app on device with configuration **UITESTS**. On iOS, replace device id with your simulator id at AppInitializer.cs
