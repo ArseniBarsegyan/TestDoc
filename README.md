@@ -1,5 +1,4 @@
-# TestDoc
-Assigment manager Xamarin mobile app
+# TM Manager mobile app
 
 # Architecture:
 Application architecture based on .Net Core DI, MVVM implemented with IViewPresenter interface in core project, as DroidViewPresenter on Android (every view model has appropriate named fragment), on iOS as IosViewPresenter (every view model has appropriate named view controller)
