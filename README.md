@@ -73,3 +73,28 @@ project use T4 templates. This template create XML-resource files on Android C# 
 
 ## Running tests:
 To run UI tests first install app on device with configuration **UITESTS**. On iOS, replace device id with your simulator id at AppInitializer.cs
+
+## Workflow:
+**Add new screen in app** 
+
+- Create new ViewModel in AssigmentManagerMobile.Core/ViewModels folder and extend BaseViewModel. All required services should be injected into constructor. 
+- Register view model in DI pipeline in Startup class.
+
+Android: 
+- Create new fragment in AssigmentManagerMobile.Droid/Fragments and extend BaseFragment.
+- Register fragment in DI pipeline in MainActivity.
+- Use MVVM Light extensions to create bindings from fragment to view model.
+
+iOS: 
+- Create new view controller in AssigmentManagerMobile.iOS/ViewControllers.
+- Register view controller in DI pipeline in AppDelegate.
+- Use MVVM Light extensions to create bindings from fragment to view model.
+
+**Write unit test for screen**
+AssignmentManagerMobile.Tests using NUnit, Moq, Shouldly.
+All unit tests covers view models tests. Tests run in **TEST** configuration.
+
+- Register mocks in AssignmentManagerMobile.Tests/RegistrationProviders/UnitTestRegistrationProvider.
+- Create test for view model in AssignmentManagerMobile.Tests/ViewModelsTests and extend TestBase class.
+- In you test class resolve mocks with Resolve<T> method and setup this mock as you want.
+- Use shouldly extensions to verify test results
