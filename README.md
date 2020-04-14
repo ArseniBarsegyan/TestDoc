@@ -77,7 +77,8 @@ To run UI tests first install app on device with configuration **UITESTS**. On i
 ## Workflow:
 **Add new screen in app** 
 
-- Create new ViewModel in AssigmentManagerMobile.Core/ViewModels folder
+AssigmentManagerMobile.Core:
+- Create new ViewModel in AssigmentManagerMobile.Core/ViewModels folder.
 - Your view model should extend BaseViewModel.
 - If you're going to use navigation data, extend BaseViewModel<TNavigationData>.
 - All required services should be injected into view model's constructor.
@@ -89,6 +90,8 @@ Android:
 - Fragment name should have view model's name and "Fragment" suffix.
 - Register fragment in DI pipeline in MainActivity, ConfigurePlatformServices() method.
 - Override SetBindings() and use MVVM Light extensions to create bindings from fragment to view model.
+- All bindings should be stored as private fields of ViewController. That should be done because of weak references issue.
+  (https://docs.microsoft.com/en-us/archive/msdn-magazine/2015/june/xamarin-implementing-and-using-data-binding-in-xamarin).
 - Override CleanBindings() and clean bindings (if it's possible).
 
 iOS: 
@@ -97,6 +100,8 @@ iOS:
 - View Controller name should have view model's name and "ViewController" suffix.
 - Register view controller in DI pipeline in AppDelegate, ConfigurePlatformServices() method.
 - Override SetBindings() and use MVVM Light extensions to create bindings from fragment to view model.
+- All bindings should be stored as private fields of ViewController. That should be done because of weak references issue.
+  (https://docs.microsoft.com/en-us/archive/msdn-magazine/2015/june/xamarin-implementing-and-using-data-binding-in-xamarin).
 - Override ClearBindings() and clean bindings (if it's possible).
 
 **Write unit test for screen**
