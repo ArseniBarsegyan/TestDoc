@@ -21,7 +21,7 @@ Project with common logic of application. Implemented interfaces from AssigmentM
 Xamarin android native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core. All platform-specific dependencies registered here. Contains platform-specific logic (navigation implementation and UI), use shared code.
 
 **AssigmentManagerMobile.iOS**
-Xamarin iOS native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core. All platform-specific dependencies registered here. Contains platform-specific logic (navigation implementation and UI), use shared code.
+Xamarin iOS native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core. All platform-specific dependencies registered here. Contains platform-specific logic (navigation implementation and UI), use shared code. No storyboards or xib files. ViewControllers and views are written in code.
 
 **AssigmentManager.Fake**
 Contains mock (fake) implementations for AssigmentManagerMobile.Core.Interfaces.
@@ -63,6 +63,26 @@ project use T4 templates. This template create XML-resource files on Android C# 
 
 **Running tests**:
 To run UI tests first install app on device with configuration UITESTS. On iOS, replace device id with your simulator id at AppInitializer.cs
+
+## Authorization and http requests
+
+App use Http clients registration in DI pipeline with http handlers and retry policy setup (https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1). All http clients are registered in Startup.cs in AssigmentManagerMobile.Core. Project uses Azure AD (ADAL) for authorization. For ADAL app register AdalHttpClientFactory. For ADAL app implements AdalHttpClientFactory which provide it's own http client.
+
+**Primary message handler** 
+
+Native message handler for every platform (DroidClientHandler on Android, NSUrlSessionHandler on iOS).
+
+**AuthenticatedHttpClientHandler** 
+
+Used for retrieving access token from Azure AD. When no token available, this handler redirect user to Microsoft login page. After successful login token getting saved to local secure storage (more detailed info - https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/wiki)
+
+**LoggingHttpClientHandler** 
+
+Used for logging http request. Logs are sent to AppCenter analytics.
+
+**Policy**
+
+Http clients are using policy for http errors. On 400, 403, 408, 5XX http error code http client retry attempt 2 times (0.2, 0.5 sec time span). If error repeat, it'll be thrown.
 
 ## Workflow:
 **Using shared code**
