@@ -119,7 +119,8 @@ To run Unit tests:
 
 **Write UI test for screen**
 
-AssignmentManagerMobile.UITests project using SpecFlow, Xamarin UITest
+AssignmentManagerMobile.UITests project use SpecFlow, Xamarin UITest. 
+
 Strongly recommended installation of SpecFlow extension to Visual Studio (see https://specflow.org/getting-started/#InstallSetup)
 All tests written as Features and Steps. To test screen you should:
 - Add new .feature and Feature.cs files to /Features.
