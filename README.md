@@ -78,16 +78,18 @@ To run UI tests first install app on device with configuration **UITESTS**. On i
 **Add new screen in app** 
 
 - Create new ViewModel in AssigmentManagerMobile.Core/ViewModels folder and extend BaseViewModel. All required services should be injected into constructor. 
-- Register view model in DI pipeline in Startup class.
+- Register view model in DI pipeline in Startup class, ConfigureServices() method.
 
 Android: 
 - Create new fragment in AssigmentManagerMobile.Droid/Fragments and extend BaseFragment.
-- Register fragment in DI pipeline in MainActivity.
+- Fragment name should have view model's name and "Fragment" suffix.
+- Register fragment in DI pipeline in MainActivity, ConfigurePlatformServices() method.
 - Use MVVM Light extensions to create bindings from fragment to view model.
 
 iOS: 
 - Create new view controller in AssigmentManagerMobile.iOS/ViewControllers.
-- Register view controller in DI pipeline in AppDelegate.
+- View Controller name should have view model's name and "ViewController" suffix.
+- Register view controller in DI pipeline in AppDelegate, ConfigurePlatformServices() method.
 - Use MVVM Light extensions to create bindings from fragment to view model.
 
 **Write unit test for screen**
