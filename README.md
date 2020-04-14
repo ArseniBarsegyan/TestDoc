@@ -77,20 +77,27 @@ To run UI tests first install app on device with configuration **UITESTS**. On i
 ## Workflow:
 **Add new screen in app** 
 
-- Create new ViewModel in AssigmentManagerMobile.Core/ViewModels folder and extend BaseViewModel. All required services should be injected into constructor. 
+- Create new ViewModel in AssigmentManagerMobile.Core/ViewModels folder
+- Your view model should extend BaseViewModel.
+- If you're going to use navigation data, extend BaseViewModel<TNavigationData>.
+- All required services should be injected into view model's constructor.
 - Register view model in DI pipeline in Startup class, ConfigureServices() method.
 
 Android: 
 - Create new fragment in AssigmentManagerMobile.Droid/Fragments and extend BaseFragment.
+- Your fragment should extend BaseFragment<TViewModel>.
 - Fragment name should have view model's name and "Fragment" suffix.
 - Register fragment in DI pipeline in MainActivity, ConfigurePlatformServices() method.
-- Use MVVM Light extensions to create bindings from fragment to view model.
+- Override SetBindings() and use MVVM Light extensions to create bindings from fragment to view model.
+- Override CleanBindings() and clean bindings (if it's possible).
 
 iOS: 
 - Create new view controller in AssigmentManagerMobile.iOS/ViewControllers.
+- Your view controller should extend BaseViewController<TViewModel>.
 - View Controller name should have view model's name and "ViewController" suffix.
 - Register view controller in DI pipeline in AppDelegate, ConfigurePlatformServices() method.
-- Use MVVM Light extensions to create bindings from fragment to view model.
+- Override SetBindings() and use MVVM Light extensions to create bindings from fragment to view model.
+- Override ClearBindings() and clean bindings (if it's possible).
 
 **Write unit test for screen**
 
@@ -101,6 +108,9 @@ All unit tests covers view models tests. Tests run in **TEST** configuration.
 - Create test for view model in AssignmentManagerMobile.Tests/ViewModelsTests and extend TestBase class.
 - In you test class resolve mocks with Resolve<T> method and setup this mock as you want.
 - Use shouldly extensions to verify test results
+  
+To run Unit tests:
+- Run AssignmentManagerMobile.Tests project in **TEST** configuration.
 
 **Write UI test for screen**
 
@@ -117,3 +127,8 @@ All tests written as Features and Steps. To test screen you should:
 - If you need to test UI for several states (for instance, availability of buttons that depends on user permissions), use BackdoorMethods (see https://docs.microsoft.com/en-us/appcenter/test-cloud/uitest/working-with-backdoors)
 - All backdoor methods should be created in MainActivity (Android) and AppDelegate (iOS), for **UITESTS** configuration only.
 - Use BackdoorHelper.cs to call these methods in your UI test. Use Pascal case method name (default C# method naming convention) as argument when calling Invoke() method.
+
+To run UI tests:
+- Install app with **UITESTS** configuration.
+- Run UI tests in **UITESTS** configuration.
+- For iOS simulator replace DeviceIdentifier in AppInitializer.cs
