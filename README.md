@@ -128,7 +128,7 @@ iOS:
 
 **Write unit test for screen**
 
-AssignmentManagerMobile.Tests using NUnit, Moq, Shouldly. Unit tests mock http requests with MockHttpClientHandler. Tests covers  Http policy tests and view models tests. Tests should be written with next requirements:
+AssignmentManagerMobile.Tests using NUnit, Moq, Shouldly. Unit tests mock http requests with MockHttpClientHandler. Tests covers  Http policy tests and view models tests. Policy tests covers cheks if token present in http headers when http request is performed, http request should be invoked once if token is present in http header during requests, and retry http request headers policies are working ok.Tests should be written with next requirements:
 - Tests should cover all public methods of view models.
 - Every test method should cover only one state of unit of business logic (for instance, method in view model).
 - Unit of business logic should be covered by all possible tests.
