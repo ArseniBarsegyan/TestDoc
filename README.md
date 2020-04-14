@@ -128,9 +128,15 @@ iOS:
 
 **Write unit test for screen**
 
-AssignmentManagerMobile.Tests using NUnit, Moq, Shouldly.
-All unit tests covers view models tests. Tests run in **TEST** configuration.
+AssignmentManagerMobile.Tests using NUnit, Moq, Shouldly. Unit tests mock http requests with MockHttpClientHandler. Tests covers  Http policy tests and view models tests. Tests should be written with next requirements:
+- Tests should cover all public methods of view models.
+- Every test method should cover only one state of unit of business logic (for instance, method in view model).
+- Unit of business logic should be covered by all possible tests.
+- When unit of business logic contains several logic states, start from all negative conditions, then positive-negative and it's combinations (for example, false-false-true, false-true-true, true-false-true etc.), at the end test all positive conditions).
+- Every logic state test should be tested separate method.
+Tests run in **TEST** configuration.
 
+Order of writing unit test for screen:
 - Register mocks in AssignmentManagerMobile.Tests/RegistrationProviders/UnitTestRegistrationProvider.
 - Create test for view model in AssignmentManagerMobile.Tests/ViewModelsTests and extend TestBase class.
 - In you test class resolve mocks with Resolve<T> method and setup this mock as you want.
