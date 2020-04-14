@@ -91,6 +91,7 @@ iOS:
 - Use MVVM Light extensions to create bindings from fragment to view model.
 
 **Write unit test for screen**
+
 AssignmentManagerMobile.Tests using NUnit, Moq, Shouldly.
 All unit tests covers view models tests. Tests run in **TEST** configuration.
 
@@ -100,6 +101,7 @@ All unit tests covers view models tests. Tests run in **TEST** configuration.
 - Use shouldly extensions to verify test results
 
 **Write UI test for screen**
+
 AssignmentManagerMobile.UITests project using SpecFlow, Xamarin UITest
 Strongly recommended installation of SpecFlow extension to Visual Studio (see https://specflow.org/getting-started/#InstallSetup)
 All tests written as Features and Steps. To test screen you should:
