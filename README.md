@@ -15,19 +15,13 @@ Contains models for entire app
 Contains interfaces of services for entire app (logging, api, commanding, navigation services), refit services (REST)
 
 **AssigmentManagerMobile.Core**
-Project with common logic of application.
-Implemented interfaces from AssigmentManagerMobile.Core.Interfaces, contains view models, shared resources (Colors, Dimensions, Strings, View Ids).
-All shared dependencies configured here
+Project with common logic of application. Implemented interfaces from AssigmentManagerMobile.Core.Interfaces, contains view models, shared resources (Colors, Dimensions, Strings, View Ids). All shared dependencies configured here
 
 **AssigmentManagerMobile.Droid**
-Xamarin android native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core.
-All platform-specific dependencies registered here.
-Contains platform-specific logic (navigation implementation and UI), use shared code.
+Xamarin android native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core. All platform-specific dependencies registered here. Contains platform-specific logic (navigation implementation and UI), use shared code.
 
 **AssigmentManagerMobile.iOS**
-Xamarin iOS native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core.
-All platform-specific dependencies registered here.
-Contains platform-specific logic (navigation implementation and UI), use shared code.
+Xamarin iOS native project, reference to AssigmentManagerMobile.Core.Data, AssigmentManagerMobile.Core.Interfaces and AssigmentManagerMobile.Core. All platform-specific dependencies registered here. Contains platform-specific logic (navigation implementation and UI), use shared code.
 
 **AssigmentManager.Fake**
 Contains mock (fake) implementations for AssigmentManagerMobile.Core.Interfaces.
@@ -43,11 +37,7 @@ run project in TEST configuration.
 
 **AssignmentManagerMobile.UITests**
 Contains UI tests for entire app for Android and iOS. Project use SpecFlow and separate testing to features.
-For cross-platform UI testing every UI element which is being checked should contain special id (android:contentDescription on Android,
-AccessibilityIdentifier property on iOS).
-Every feature runs independently. Some tests covers different UI conditions that depends on api-response.
-For this purpose tests use backdoor methods. Backdoor methods implemented for Android and iOS and included in source code
-only for UITESTS configuration. In order to run UI tests properly app should be installed on device with configuration UITESTS.
+For cross-platform UI testing every UI element which is being checked should contain special id (android:contentDescription on Android, AccessibilityIdentifier property on iOS). Every feature runs independently. Some tests covers different UI conditions that depends on api-response. For this purpose tests use backdoor methods. Backdoor methods implemented for Android and iOS and included in source code only for UITESTS configuration. In order to run UI tests properly app should be installed on device with configuration UITESTS.
 
 ## Configurations:
 App has next configurations: DEBUGMOCK, DEBUGREAL, STAGING, STORE, TEST, UITESTS.
@@ -71,10 +61,22 @@ project use T4 templates. This template create XML-resource files on Android C# 
 
 **AssigmentManager.Fake** included in **AssigmentManagerMobile.Core** only for DEBUGMOCK or UITESTS configurations.
 
-## Running tests:
-To run UI tests first install app on device with configuration **UITESTS**. On iOS, replace device id with your simulator id at AppInitializer.cs
+**Running tests**:
+To run UI tests first install app on device with configuration UITESTS. On iOS, replace device id with your simulator id at AppInitializer.cs
 
 ## Workflow:
+**Using shared code**
+
+AssigmentManagerMobile.Core contains T4 templates (https://docs.microsoft.com/en-us/visualstudio/modeling/writing-a-t4-text-template?view=vs-2019). Core project contains shared resources, stored in /Resources folder. Some of shared resources can't be used directly in platform projects. T4 templates will generate platform-dependant resources. All templates are stored in AssigmentManagerMobile.Core/Templates. 
+
+In order to use auto-generated resources in platform projects:
+- Update resources (/Resources folder)
+- Open SaveMe.tt T4 template and save it.This action will trigger resources update for platform projects.
+- Now you can access resources in platform projects.
+
+T4 templates auto-update strings.xml, colors.xml, dimens.xml on Android. 
+On iOS T4 templates auto-update Helpers/Colors. Other shared code can be accessed directly from Core project.
+
 **Add new screen in app** 
 
 AssigmentManagerMobile.Core:
@@ -134,7 +136,7 @@ All tests written as Features and Steps. To test screen you should:
 - All backdoor methods should be created in MainActivity (Android) and AppDelegate (iOS), for **UITESTS** configuration only.
 - Use BackdoorHelper.cs to call these methods in your UI test. Use Pascal case method name (default C# method naming convention) as argument when calling Invoke() method.
 
-To run UI tests:
+To run your tests:
 - Install app with **UITESTS** configuration.
 - Run UI tests in **UITESTS** configuration.
 - For iOS simulator replace DeviceIdentifier in AppInitializer.cs
