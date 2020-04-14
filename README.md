@@ -98,3 +98,18 @@ All unit tests covers view models tests. Tests run in **TEST** configuration.
 - Create test for view model in AssignmentManagerMobile.Tests/ViewModelsTests and extend TestBase class.
 - In you test class resolve mocks with Resolve<T> method and setup this mock as you want.
 - Use shouldly extensions to verify test results
+
+**Write UI test for screen**
+AssignmentManagerMobile.UITests project using SpecFlow, Xamarin UITest
+Strongly recommended installation of SpecFlow extension to Visual Studio (see https://specflow.org/getting-started/#InstallSetup)
+All tests written as Features and Steps. To test screen you should:
+- Add new .feature and Feature.cs files to /Features.
+- In .feature file describe steps to reproduce your test conditions. Use existing steps.
+- Feature.cs file should extend FeatureBase (see other features)
+- Generate Steps file in /Steps folder.
+- Change Steps file to extend StepsBase.
+- Write steps to reproduce test conditions.
+- Use shouldly extensions to verify test results
+- If you need to test UI for several states (for instance, availability of buttons that depends on user permissions), use BackdoorMethods (see https://docs.microsoft.com/en-us/appcenter/test-cloud/uitest/working-with-backdoors)
+- All backdoor methods should be created in MainActivity (Android) and AppDelegate (iOS), for **UITESTS** configuration only.
+- Use BackdoorHelper.cs to call these methods in your UI test. Use Pascal case method name (default C# method naming convention) as argument when calling Invoke() method.
