@@ -64,9 +64,8 @@ project use T4 templates. This template create XML-resource files on Android C# 
 **Running tests**:
 To run UI tests first install app on device with configuration UITESTS. On iOS, replace device id with your simulator id at AppInitializer.cs
 
-## Authorization and http requests
-
-App use Http clients registration in DI pipeline with http handlers and retry policy setup (https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1). All http clients are registered in Startup.cs in AssigmentManagerMobile.Core. Project uses Azure AD (ADAL) for authorization. For ADAL app register AdalHttpClientFactory. For ADAL app implements AdalHttpClientFactory which provide it's own http client.
+## Http requests and authentication
+App use Http clients registration in .Net Core DI pipeline with http handlers and retry policy setup (https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1). All http clients are registered in Startup.cs in AssigmentManagerMobile.Core. All http clients configured with http request handlers. There are several http request handlers in app.
 
 **Primary message handler** 
 
@@ -74,7 +73,7 @@ Native message handler for every platform (DroidClientHandler on Android, NSUrlS
 
 **AuthenticatedHttpClientHandler** 
 
-Used for retrieving access token from Azure AD. When no token available, this handler redirect user to Microsoft login page. After successful login token getting saved to local secure storage (more detailed info - https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/wiki)
+Used for authorize user and retrieving access token.
 
 **LoggingHttpClientHandler** 
 
@@ -83,6 +82,22 @@ Used for logging http request. Logs are sent to AppCenter analytics.
 **Policy**
 
 Http clients are using policy for http errors. On 400, 403, 408, 5XX http error code http client retry attempt 2 times (0.2, 0.5 sec time span). If error repeat, it'll be thrown.
+
+**Authentication flow**
+
+During http request http handlers handle request (chain of responsibility pattern), modify it, if necessary, and then throw it to next http handler. API requires user authentication in system (access token is required), **AuthenticatedHttpClientHandler** checks if token present in http request headers. If no token founded, this handler redirect request to identity server. After successful login token got saved to secure local storage, added to http request header and request performed to API.
+
+## Deeplinking
+
+App use deeplinking for performance review section. Deeplinking has next flow:
+- User recieve e-mail with link
+- User opens link and select installed app as link handler
+- App open and navigate user to performance review section
+
+Also, deeplinking works for push-notification.
+- User recieve push notification
+- User tap on notification
+- App open and navigate user to performance review section
 
 ## Workflow:
 **Using shared code**
