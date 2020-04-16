@@ -1,11 +1,11 @@
 # TM Manager mobile app
 
-## Architecture:
+## Architecture
 Application architecture based on .Net Core DI, MVVM implemented with IViewPresenter interface in core project, as DroidViewPresenter on Android (every view model has appropriate named fragment), on iOS as IosViewPresenter (every view model has appropriate named view controller)
 
 ![Architecture image](/TMManagerDiagram.png)
 
-## Solution structure:
+## Solution structure
 ![Solution structure image](/Solution_screenshot.png)
 
 **AssigmentManagerMobile.Core.Data**
@@ -39,7 +39,7 @@ run project in TEST configuration.
 Contains UI tests for entire app for Android and iOS. Project use SpecFlow and separate testing to features.
 For cross-platform UI testing every UI element which is being checked should contain special id (android:contentDescription on Android, AccessibilityIdentifier property on iOS). Every feature runs independently. Some tests covers different UI conditions that depends on api-response. For this purpose tests use backdoor methods. Backdoor methods implemented for Android and iOS and included in source code only for UITESTS configuration. In order to run UI tests properly app should be installed on device with configuration UITESTS.
 
-## Configurations:
+## Configurations
 App has next configurations: DEBUGMOCK, DEBUGREAL, STAGING, STORE, TEST, UITESTS.
 
 **DEBUGMOCK** configured to use fake AssigmentManager.Fake project instead of real implementations.
@@ -54,14 +54,14 @@ App has next configurations: DEBUGMOCK, DEBUGREAL, STAGING, STORE, TEST, UITESTS
 
 **UITEST** In this configuration app use fake services from AssigmentManager.Fake. Platform projects also implement backdoor methods for this configuration for UI testing.
 
-## Hacks:
+## Hacks
 **AssigmentManagerMobile.Core** has resources that are shared across Android and iOS.
 These resources are: Colors, Dimensions, Strings, ViewsIds. To generate these C# values into platform-specific values
 project use T4 templates. This template create XML-resource files on Android C# classes on iOS from shared code.
 
 **AssigmentManager.Fake** included in **AssigmentManagerMobile.Core** only for DEBUGMOCK or UITESTS configurations.
 
-**Running tests**:
+**Running tests**
 To run UI tests first install app on device with configuration UITESTS. On iOS, replace device id with your simulator id at AppInitializer.cs
 
 ## Http requests and authentication
@@ -99,7 +99,7 @@ Also, deeplinking works for push-notification.
 - User tap on notification
 - App open and navigate user to performance review section
 
-## Workflow:
+## Workflow
 **Using shared code**
 
 AssigmentManagerMobile.Core contains T4 templates (https://docs.microsoft.com/en-us/visualstudio/modeling/writing-a-t4-text-template?view=vs-2019). Core project contains shared resources, stored in /Resources folder. Some of shared resources can't be used directly in platform projects. T4 templates will generate platform-dependant resources. All templates are stored in AssigmentManagerMobile.Core/Templates. 
